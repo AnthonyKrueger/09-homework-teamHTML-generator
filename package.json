@@ -1,0 +1,24 @@
+{
+  "name": "09-homework-teamhtml-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyKrueger/09-homework-teamHTML-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnthonyKrueger/09-homework-teamHTML-generator/issues"
+  },
+  "homepage": "https://github.com/AnthonyKrueger/09-homework-teamHTML-generator#readme",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "inquirer": "^8.1.0",
+    "jest": "^27.0.4"
+  }
+}
