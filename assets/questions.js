@@ -1,35 +1,44 @@
+// Import requirements
 
 const inquirer = require('inquirer')
-const Employee = require("./employee.js")
+const chalk = require("chalk")
+
+// Define Colors
+
+const green = chalk.green
+const special = chalk.black.bgWhite
+
+// Function to ask questions about and define properties of the Employee object, push the object into
+// the passed in list object, and run a callback function
 
 function askEmployeeInfo(employee, list, callback) {
     const questions = [
         {
             type: "input",
-            message: "What is the employee's name?",
+            message: green("What is the employee's name?"),
             name: "name",
         },
         {
             type: "input",
-            message: "What is the employee's ID number?",
+            message: green("What is the employee's ID number?"),
             name: "id",
         },
         {
             type: "input",
-            message: "What is the employee's Email Adress?",
+            message: green("What is the employee's Email Adress?"),
             name: "email",
         },
         {
             type: "input",
-            message: "What is the employee's office number?",
+            message: green("What is the employee's office number?"),
             name: "extra",
         }
     ]
     if(employee.role === "Intern") {
-        questions[3].message = "What school did this intern go to?"
+        questions[3].message = green("What school did this intern go to?")
     }
     else if(employee.role === "Engineer") {
-        questions[3].message = "Enter a link to the employee's GitHub account."
+        questions[3].message = green("Enter a link to the employee's GitHub account.")
     }
     inquirer.prompt(questions).then((response) => {
         const {name, id, email, extra} = response;
@@ -37,14 +46,15 @@ function askEmployeeInfo(employee, list, callback) {
         list.employees.push(employee);
         callback(list)
     })
-
 }
+
+// Function to choose a new Employee type or finalize the List object
 
 function nextEmployee(list, callback) {
     inquirer.prompt(
         {
             type: "list",
-            message: "Add another employee?",
+            message: special(" Add another employee? "),
             choices: ["Engineer", "Intern", "Done Adding Employees"],
             name: "type"
         }).then((response) => {
@@ -53,8 +63,7 @@ function nextEmployee(list, callback) {
                 callback(list);
             }
             else {
-                const employee = new Employee(response.type)
-                askEmployeeInfo(employee, list, callback);
+                callback(response.type)
             }
         })
 }
