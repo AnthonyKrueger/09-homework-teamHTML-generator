@@ -1,5 +1,6 @@
 const inquirer = require('inquirer')
 const Employee = require("./employee.js")
+const List = require("./employeelist.js")
 const questions = require("./questions.js")
 
 jest.mock("inquirer");
@@ -8,13 +9,14 @@ describe('#askEmployeeInfo', () => {
     const placeholderEmployee1 = new Employee("Manager")
     const placeholderEmployee2 = new Employee("Manager")
     placeholderEmployee2.populateData("John", 1, "john@gmail.com", 35)
-    const placeholderList = {employees:[], finalized:false}
+    const placeholderList = new List()
 
     it('should take data entered, populate employee data to a list, and run a callback', () => {
         inquirer.prompt = jest.fn().mockResolvedValue(placeholderEmployee2)
         questions.askEmployeeInfo(placeholderEmployee1, placeholderList, testCB);
         function testCB(data) {
-            expect(placeholderList.employees[0]).toBeDefined()
+            expect(placeholderList.employees[0]).toStrictEqual(placeholderEmployee2)
+            expect(placeholderList.employees[0]).toStrictEqual(placeholderEmployee1)
         }
     });
 });
