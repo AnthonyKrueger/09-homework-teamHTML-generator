@@ -6,7 +6,7 @@ const chalk = require("chalk")
 // Define Colors
 
 const green = chalk.green
-const special = chalk.black.bgWhite
+const special = chalk.black.bgGreen
 
 // Function to ask questions about and define properties of the Employee object, push the object into
 // the passed in list object, and run a callback function

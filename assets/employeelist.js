@@ -9,14 +9,10 @@ EmployeeList.prototype.formatEmployees = function() {
         if(employee.role === "Manager") {
             employee.extra = `Office Number: ${employee.extra}`
         }
-        else if(employee.role === "Engineer") {
-            employee.extra = `GitHub: ${employee.extra}`
-        }
-        else {
+        else if(employee.role === "Intern") {
             employee.extra = `School: ${employee.extra}`
         }
         employee.name = `Name: ${employee.name}`
-        employee.role = `Role: ${employee.role}`
         employee.id = `ID: ${employee.id}`
         employee.email = `Email: ${employee.email}`
         formattedEmployees.push(employee)

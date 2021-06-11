@@ -25,7 +25,7 @@ describe('#nextEmployee', () => {
 
     it('should take a role option and return it to a callback function', () => {
         inquirer.prompt = jest.fn().mockResolvedValue({type: "Engineer"})
-        const placeholderList = {employees:[], finalized:false}
+        const placeholderList = new List()
         questions.nextEmployee(placeholderList, testCB)
         function testCB(data) {
             expect(data).toBe("Engineer");

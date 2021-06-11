@@ -13,4 +13,21 @@ Employee.prototype.populateData = function (name, id, email, extra) {
     this.extra = extra;
 }
 
+Employee.prototype.populateExtraHTMLData = function () {
+
+    if(this.role === "Manager") {
+        this.color = "red";
+        this.icon = "computer";
+    }
+    else if(this.role === "Engineer") {
+        this.color = "deep-purple";
+        this.icon = "computer";
+        this.extra = `GitHub: <a href=https://${this.extra}>${this.extra}</a>`
+    }
+    else {
+        this.color = "green";
+        this.icon = "create";
+    }
+}
+
 module.exports = Employee;
