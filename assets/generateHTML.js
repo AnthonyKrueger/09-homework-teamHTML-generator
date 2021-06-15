@@ -1,6 +1,14 @@
 const fs = require("fs")
 
-const htmlTop = `<!DOCTYPE html>
+
+const htmlBottom = `        </div>
+</div> 
+</body>
+</html>`
+
+
+function generateHTML(list) {
+    const htmlTop = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +17,7 @@ const htmlTop = `<!DOCTYPE html>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Team Summary</title>
+    <title>${list.title}</title>
     <style>
         .row .col {
             padding: 0;
@@ -20,25 +28,18 @@ const htmlTop = `<!DOCTYPE html>
     </style>
 </head>
 <body>
-    <header class = "row blue">
+    <header class = "row ${list.headerColor}">
         <div class = "col s12 center">
-            <h1 class = "white-text">Team Info</h1>
+            <h1 class = "white-text">${list.title}</h1>
         </div>
     </header>
     <div class = "row container">
         <div class = "col s12"></div>`
 
-const htmlBottom = `        </div>
-</div> 
-</body>
-</html>`
-
-
-function generateHTML(list) {
 
     let middleString = ""
 
-    list.forEach(employee => {
+    list.employees.forEach(employee => {
         employee.populateExtraHTMLData();
         const {role, name, id, email, extra, color, icon} = employee
         const string = `            <div class = "col s12 m4 card">
@@ -53,7 +54,7 @@ function generateHTML(list) {
                 <span class = "id">${id}</span>
             </div>
             <div>
-                <span class = "email">${email}</span>
+                <span class = "email">Email: <a href="mailto:${email}">${email}</a></span>
             </div>
             <div>
                 <span class = "extra">${extra}</span>

@@ -1,6 +1,6 @@
 // Import requirements
 
-const { nextEmployee, askEmployeeInfo } = require('./assets/questions.js')
+const { nextEmployee, askEmployeeInfo, initQuestion } = require('./assets/questions.js')
 const Employee = require("./assets/employee.js")
 const List = require("./assets/employeelist")
 const generateHtml = require("./assets/generateHTML.js")
@@ -18,8 +18,8 @@ const employeeList = new List();
 function questionsCallback(data) {
     if (data instanceof List) {
         if (data.finalized) {
-            const formattedList = data.formatEmployees()
-            generateHtml(formattedList);
+            employeeList.formatEmployees()
+            generateHtml(employeeList);
         }
         else {
             nextEmployee(data, questionsCallback)
@@ -35,13 +35,13 @@ function questionsCallback(data) {
 
 // Function to run on initialization - Creates a Manager and begins the loop
 
-function initQuestionLoop() {
+function initQuestionLoop(list) {
     console.log(chalk.black.bgGreenBright(" Start by entering the Manager's Information "));
     const manager = new Employee("Manager");
-    askEmployeeInfo(manager, employeeList, questionsCallback);
+    askEmployeeInfo(manager, list, questionsCallback);
     return "Loop Started"
 }
 
- initQuestionLoop();
+ initQuestion(employeeList, initQuestionLoop)
 
 module.exports = {questionsCallback, initQuestionLoop}

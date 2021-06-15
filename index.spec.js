@@ -1,19 +1,22 @@
 const index = require("./index.js")
 const Employee = require("./assets/employee.js")
 const List = require("./assets/employeelist.js")
+let generateHTML = require("./assets/generateHTML.js")
 const placeholderEmployee1 = new Employee("Manager")
 placeholderEmployee1.populateData("John", 1, "john@gmail.com", 35)
 
 jest.mock("./assets/questions.js")
+jest.mock("./assets/generateHTML.js")
 
 describe('#questionsCallback', () => {
 
     it('should take a finalized list and format it', () => {
+        generateHTML = jest.fn();
         const employeeList = new List();
         employeeList.employees.push(placeholderEmployee1)
         employeeList.finalized = true;
-        const formattedList = index.questionsCallback(employeeList)
-        expect(formattedList[0].name).toBe("Name: John")
+        employeeList.formatEmployees()
+        expect(employeeList.employees[0].name).toBe("Name: John")
     });
 
     it('should take an unfinalized list and run nextEmployee with it', () => {

@@ -35,10 +35,10 @@ describe('EmployeeList', () => {
                 extra: "Northwestern"
             }
             employeeList.employees.push(placeholderEmployee1, placeholderEmployee2, placeholderEmployee3);
-            const formattedList = employeeList.formatEmployees()
-            expect(formattedList[0].extra).toBe("Office Number: 35");
-            expect(formattedList[1].extra).toBe("GitHub: steve.github.com");
-            expect(formattedList[2].extra).toBe("School: Northwestern");
+            employeeList.formatEmployees()
+            expect(employeeList.employees[0].extra).toBe("Office Number: 35");
+            expect(employeeList.employees[1].extra).toBe("steve.github.com");
+            expect(employeeList.employees[2].extra).toBe("School: Northwestern");
         });
     })
 })
